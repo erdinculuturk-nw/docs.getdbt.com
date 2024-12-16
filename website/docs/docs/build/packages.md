@@ -171,7 +171,7 @@ Native support for private packages is supported on the following services:
 
 Support for Gitlab is coming soon. 
 
-You must have the Git service configured in the **Integrations** section of your **Account settings** to use this feature.
+To use this feature, you must have a supported Git provider configured in the **Integrations** section of your **Account settings**.
 
 #### Configuration
 
