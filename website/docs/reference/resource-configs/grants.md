@@ -11,7 +11,7 @@ The grant resource configs enable you to apply permissions at build time to a sp
 
 dbt aims to use the most efficient approach when updating grants, which varies based on the adapter you're using, and whether dbt is replacing or updating an object that already exists. You can always check the debug logs for the full set of grant and revoke statements that dbt runs.
 
-You should define grants as resource configs whenever possible, but you might occasionally need to write grants statements manually and run them using hooks. For example, hooks may be appropriate if you want to:
+You should define grants as resource configs whenever possible, but you might occasionally need to write grants statements manually and run them using [hooks](/docs/build/hooks-operations). For example, hooks may be appropriate if you want to:
 
 * Apply grants on other database objects besides views and tables.
 * Create more granular row- and column-level access, use masking policies, or apply future grants.
@@ -208,7 +208,7 @@ If you delete the `+grants` section altogether, dbt will assume you no longer wa
 
     ```yml
     models:
-    
+
       # this section intentionally left blank
     ```
 
