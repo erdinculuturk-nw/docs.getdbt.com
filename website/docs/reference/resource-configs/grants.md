@@ -154,6 +154,20 @@ Now, the model will grant select to `user_a`, `user_b`, AND `user_c`!
 - This use of `+`, controlling clobber vs. add merge behavior, is distinct from the use of `+` in `dbt_project.yml` (shown in the example above) for defining configs with dictionary values. For more information, see [the plus prefix](https://docs.getdbt.com/reference/resource-configs/plus-prefix).
 - `grants` is the first config to support a `+` prefix for controlling config merge behavior. Currently, it's the only one. If it proves useful, we may extend this capability to new and existing configs in the future.
 
+### Conditional grants
+
+Like any other config, you can use Jinja to vary the grants in different contexts. For example, you might grant different permissions in prod than dev:
+
+<File name='dbt_project.yml'>
+
+```yml
+models:
+  +grants:
+    select: "{{ ['user_a', 'user_b'] if target.name == 'prod' else ['user_c'] }}"
+```
+
+</File>
+
 ## Revoking grants
 
 dbt will only modify grants on a node (including revocation) when a `grants` configuration is attached to that node. For example, imagine you had originally specified the following grants in `dbt_project.yml`:
@@ -312,7 +326,7 @@ models:
 
 <div warehouse="Redshift">
 
-* Granting to / revoking from is only fully supported for Redshift users (not [groups](https://docs.aws.amazon.com/redshift/latest/dg/r_Groups.html) or [roles](https://docs.aws.amazon.com/redshift/latest/dg/r_roles-managing.html)).
+* Granting to / revoking from is only fully supported for Redshift users (not [groups](https://docs.aws.amazon.com/redshift/latest/dg/r_Groups.html) or [roles](https://docs.aws.amazon.com/redshift/latest/dg/r_roles-managing.html)). See [dbt-redshift#415](https://github.com/dbt-labs/dbt-redshift/issues/415) for the corresponding issue.
 
 </div>
 
